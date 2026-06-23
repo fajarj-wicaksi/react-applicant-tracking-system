@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "@/widgets/layout/MainLayout";
+import { ProtectedRoute } from "./routes/ProtectedRoute";
+import { LoginPage } from "@/pages/auth/LoginPage";
 
 // Temporary placeholder pages
 const Dashboard = () => <div><h1 className="text-3xl font-bold">Dashboard</h1><p className="text-muted-foreground mt-2">Welcome to TalentFlow ATS</p></div>;
@@ -10,44 +12,54 @@ const Tasks = () => <div><h1 className="text-3xl font-bold">Tasks</h1></div>;
 
 const router = createBrowserRouter([
   {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
     path: "/",
-    element: (
-      <MainLayout>
-        <Dashboard />
-      </MainLayout>
-    ),
-  },
-  {
-    path: "/jobs",
-    element: (
-      <MainLayout>
-        <Jobs />
-      </MainLayout>
-    ),
-  },
-  {
-    path: "/candidates",
-    element: (
-      <MainLayout>
-        <Candidates />
-      </MainLayout>
-    ),
-  },
-  {
-    path: "/interviews",
-    element: (
-      <MainLayout>
-        <Interviews />
-      </MainLayout>
-    ),
-  },
-  {
-    path: "/tasks",
-    element: (
-      <MainLayout>
-        <Tasks />
-      </MainLayout>
-    ),
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/",
+        element: (
+          <MainLayout>
+            <Dashboard />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "/jobs",
+        element: (
+          <MainLayout>
+            <Jobs />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "/candidates",
+        element: (
+          <MainLayout>
+            <Candidates />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "/interviews",
+        element: (
+          <MainLayout>
+            <Interviews />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "/tasks",
+        element: (
+          <MainLayout>
+            <Tasks />
+          </MainLayout>
+        ),
+      },
+    ],
   },
 ]);
 
