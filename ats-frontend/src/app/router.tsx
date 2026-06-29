@@ -2,13 +2,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "@/widgets/layout/MainLayout";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { LoginPage } from "@/pages/auth/LoginPage";
+import { PipelinePage } from "@/pages/pipeline/PipelinePage";
+import { AdminDashboard } from "@/pages/admin/AdminDashboard";
+import { TenantsPage } from "@/pages/admin/TenantsPage";
+import { BillingPage } from "@/pages/admin/BillingPage";
+import { JobsPage } from "@/pages/jobs/JobsPage";
+import { CandidatesPage } from "@/pages/candidates/CandidatesPage";
+import { UsersPage } from "@/pages/users/UsersPage";
+import { InterviewsPage } from "@/pages/interviews/InterviewsPage";
+import { TasksPage } from "@/pages/tasks/TasksPage";
 
 // Temporary placeholder pages
 const Dashboard = () => <div><h1 className="text-3xl font-bold">Dashboard</h1><p className="text-muted-foreground mt-2">Welcome to TalentFlow ATS</p></div>;
-const Jobs = () => <div><h1 className="text-3xl font-bold">Jobs</h1></div>;
-const Candidates = () => <div><h1 className="text-3xl font-bold">Candidates</h1></div>;
-const Interviews = () => <div><h1 className="text-3xl font-bold">Interviews</h1></div>;
-const Tasks = () => <div><h1 className="text-3xl font-bold">Tasks</h1></div>;
 
 const router = createBrowserRouter([
   {
@@ -31,7 +36,7 @@ const router = createBrowserRouter([
         path: "/jobs",
         element: (
           <MainLayout>
-            <Jobs />
+            <JobsPage />
           </MainLayout>
         ),
       },
@@ -39,7 +44,15 @@ const router = createBrowserRouter([
         path: "/candidates",
         element: (
           <MainLayout>
-            <Candidates />
+            <CandidatesPage />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "/pipeline",
+        element: (
+          <MainLayout>
+            <PipelinePage />
           </MainLayout>
         ),
       },
@@ -47,7 +60,7 @@ const router = createBrowserRouter([
         path: "/interviews",
         element: (
           <MainLayout>
-            <Interviews />
+            <InterviewsPage />
           </MainLayout>
         ),
       },
@@ -55,7 +68,39 @@ const router = createBrowserRouter([
         path: "/tasks",
         element: (
           <MainLayout>
-            <Tasks />
+            <TasksPage />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "/admin",
+        element: (
+          <MainLayout>
+            <AdminDashboard />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "/admin/tenants",
+        element: (
+          <MainLayout>
+            <TenantsPage />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "/admin/billing",
+        element: (
+          <MainLayout>
+            <BillingPage />
+          </MainLayout>
+        ),
+      },
+      {
+        path: "/settings/users",
+        element: (
+          <MainLayout>
+            <UsersPage />
           </MainLayout>
         ),
       },

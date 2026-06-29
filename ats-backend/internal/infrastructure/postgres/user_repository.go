@@ -39,3 +39,17 @@ func (r *userRepository) GetByEmail(ctx context.Context, email string) (*domain.
 	}
 	return &user, nil
 }
+
+func (r *userRepository) ListByTenant(ctx context.Context, tenantID uuid.UUID) ([]domain.User, error) {
+	var users []domain.User
+	err := r.db.WithContext(ctx).Preload("Role").Where("tenant_id = ?", tenantID).Order("created_at DESC").Find(&users).Error
+	return users, err
+}
+
+func (r *userRepository) Update(ctx context.Context, user *domain.User) error {
+	return r.db.WithContext(ctx).Save(user).Error
+}
+
+func (r *userRepository) Delete(ctx context.Context, id uuid.UUID) error {
+	return r.db.WithContext(ctx).Delete(&domain.User{}, "id = ?", id).Error
+}
